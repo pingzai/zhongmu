@@ -1,0 +1,318 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<link rel="stylesheet" href="static/css/common/function.css"/>
+<link rel="stylesheet" href="static/css/common/reset.css"/>
+<script src="static/js/jquery/jquery.min.js"></script>
+<style>
+	/*头部*/
+	body{ font-family:"Hiragino Sans GB"; background:#fff;}
+	.m-hd{width:100%; background:#292929;height:34px;color:#fff;line-height:34px; }
+	.m-hd .tel{background:#5d5d5d;padding-left:9px;padding-right:5px;}
+	/*头部导航*/
+	.m-nav{height:56px;color:#1e1e1e;font-size:16px; border-bottom:2px solid #e3cccb; }
+	.m-nav .f-w{ position:relative;}
+	.m-nav a{display:block;float:left;width:162px; line-height:52px;padding-top:4px; text-align:center;}
+	.m-nav .m-logo{display:block; float:left; width:153px;height:128px;background:url(static/img/logo.png) no-repeat center; position:absolute;top:-34px; left:50%; margin-left:-77px; z-index:2; }
+	.m-nav b{display:block;width:1px;height:44px; background:#ccc; float:left;margin-top:9px;}
+	.m-nav .m-one{margin-left:155px;}
+	.m-nav .m-cur{background:#bb9861;color:#fff;}
+	
+	.m-nav a:hover{background:#bb9861;color:#fff;}
+	/*轮播图bannar*/
+	.m-bannar{width:100%; height:556px;margin:0 auto; position:relative; z-index:1;+z-index:-1;}
+	
+	.m-bannar .m-bnimg{height:556px;border-bottom:3px solid #ba9559;overflow:hidden;}
+	.m-bannar li{ float:left;}
+	.m-bannar .m-btn{position:absolute; bottom:50px; left:50%;margin-left:-105px; }
+	.m-bannar .m-btn li{width:50px; height:10px; background:#999;margin:10px; }
+	.m-bannar .m-btn .m-on{background:#ba9559;}
+	/*主体内容*/
+	/*侧边栏列表*/
+	.m-bd{margin-top:66px;}
+	.m-side{ width:260px;margin-right:46px;}
+    .m-side h2{width:100%; height:51px; background:#ba9559; color:#fff; line-height:51px; text-align:center; font-size:16px;}
+	.m-side .m-list{}
+	.m-side .m-list ul{padding-top:16px; padding-bottom:34px;}
+	.m-side .m-list li{width:224px; height:41px;line-height:41px; border-bottom:1px dashed #ba9559; margin:0 auto; text-align:center;font-size:14px; font-weight:bold;color:#000;}
+	.m-side .m-address{ height:248px; background:#ececec;padding-left:17px; box-shadow:inset -20px -2px 15px -13px #cecdcd;}
+	.m-side .m-address h4{ color:#130d03; font-size:16px; font-weight:bold; line-height:49px;}
+	.m-side .m-address p{ font-size:14px; color:#595857; line-height:30px;}
+	/*右侧内容列表*/
+	.m-bd .m-con-list{width:820px;  }
+	.m-con-list .m-con-hd{width:782px;margin:0 auto; height:45px; background:#ba9559; font-size:16px; font-weight:bold;line-height:45px;color:#fff;padding:0 14px 0 27px; } 
+	.m-con-box{width:820px; padding-top:5px;  border:1px solid #e9e7e7;}
+	.m-con-box ul{margin:0 26px 52px 26px; }
+	.m-con-box li{ line-height:42px; border-bottom:1px dashed #c5c2bd;height:42px; font-size:14px; color:#130d03; font-weight:bold;}
+	.m-con-box li span{ margin-left:12px;}
+	
+	
+	.m-con-box li i{ float:right; margin-right:4px;}
+	/*页码page*/
+	.m-page{margin-top:15px;width:100%; height:50px; }
+	.m-page a{  display:inline-block; text-align:center; border:1px solid #ccc;padding:0 15px; height:31px; line-height:31px; font-size:16px; color:#090c16;margin-right:4px;}
+	.m-page .m-sy{padding:0 8px;color:#3c3e48; }
+	.m-page .m-pg1{padding:0 6px;}
+	.m-page .m-num{}
+	.m-page .m-num span{padding:0 17px;line-height:21px; text-align:center; border:1px solid #666;margin-top:4px; display:inline-block;*display:inline !important;*margin-right:7px !important}
+	/*尾部*/
+   .m-ft{background:#292828; padding-top:35px;padding-bottom:50px; text-align:center; line-height:30px; color:#fff; font-family:'Hiragino Sans GB';}
+   .m-ft a{ font-size:12px; color:#666; padding:0 6px 0 10px;}
+   .m-ft b{color:#fff;}	
+</style>
+<script>
+	window.onload=function(){
+		//轮播图
+		;(function(){
+			var oBannar=document.getElementById('m_bannar');
+			var oBan_img=document.getElementById('m_bn_img');	
+			var aLi=oBan_img.children;
+			var oBtn=document.getElementById('m_btn');
+			var aSpan=oBtn.children;
+			var iNow=0;
+			var timer=null;				
+			for(var i=0;i<aSpan.length;i++){
+				aSpan[i].index=i;
+				aSpan[i].onclick=function(){
+						iNow= this.index;
+						tab();
+				};
+			}
+			function tab(){
+					for(var i=0;i<aSpan.length;i++){
+						aSpan[i].className='';
+						aLi[i].style.display='none';	
+					}
+					aSpan[iNow].className='m-on';
+					aLi[iNow].style.display='block';	
+			}
+			timer=setInterval(function(){
+					iNow++;
+					if(iNow==aSpan.length){
+						iNow=0;	
+					}
+					tab();		
+			},2000);
+			oBannar.onmouseover=function(){
+				clearInterval(timer);	
+			};
+			oBannar.onmouseout=function(){
+				clearInterval(timer);
+				timer=setInterval(function(){
+					iNow++;
+					if(iNow==aSpan.length){
+						iNow=0;	
+					}
+					tab();		
+				},2000);	
+			};
+					
+		})();
+		//新闻列表
+		;(function(){
+			var oCon_box =document.getElementById('m_con_box');
+			var oUl=document.getElementById('m_con');
+			
+			//创建li
+			function creat(){
+				var oLi=document.createElement('li');
+				oLi.innerHTML='<span >猪圆环病毒的诊断与防治</span><i>09-26</i>';
+				alert(oUl.appendChild(oLi));
+			}
+			
+			
+			
+			
+		})();
+		
+	};
+</script>
+</head>
+<body>
+    <!-- 头部 -->
+    <div class="g-hd">
+    	<div class="m-hd ">
+        	<div class="f-w">
+            	 <p class="f-fr tel">Tel:&nbsp;021-488454</p>
+            </div>
+           
+        </div>
+        <!--头部导航-->
+        <div class="m-nav ">
+        	<div class="f-w f-cb">
+            	<a href="#" class="m-cur">首页</a>
+                <b></b>
+                <a href="#">公司简介</a>
+                <b></b>
+                <a href="chanpinzhanshi.html">产品展示</a>
+                
+                <span class="m-logo"></span>
+                <a href="newslist.html" class="m-one">新闻资讯</a>
+                <b></b>
+                <a href="#">技术专栏</a>
+                <b></b>
+                <a href="#">联系我们</a>
+            </div>
+        </div>
+        <!--/头部导航-->
+        <!--轮播图bannar-->
+        <div class="m-bannar" id="m_bannar">
+        	<ul class="m-bnimg" id="m_bn_img">
+            	<li style="display:block"><img src="static/img/bg1.png"/></li>
+                <li><img src=""/></li>
+                <li><img src="static/img/bg1.png"/></li>
+            </ul>
+            <ol class="m-btn" id="m_btn">
+            	<li class="m-on"></li>
+                <li></li>
+                <li></li>
+            </ol>
+        </div>
+        <!--/轮播图bannar-->
+    </div>
+    <!-- /头部 --> 
+    <!-- 主体 -->
+    <div class="g-bd">
+        <div class="m-bd f-cb f-w">
+        	<!--侧边栏列表--->
+        	<div class="m-side f-fl">
+                 <div class="m-list">
+                 	<h2>栏目导航</h2>
+                 	<ul>
+                        <li><a href="#">公司动态</a></li>
+                        <li><a href="#">行业新闻</a></li>
+                        
+                 	</ul>
+                 </div>
+                 <div>
+                 	<h2>栏目导航</h2>	
+                    <div class="m-address">
+                    	<h4>山西中牧生物科技有限公司</h4>
+                        <p>地址：&nbsp;中国西安</p>
+                        <p>电话：&nbsp;15838150571</p>
+                        <p>传真：&nbsp;</p>
+                        <p>网址：&nbsp;www.baidu.com</p>
+                    </div>
+                 </div>
+            </div>
+            <!--/侧边栏列表--->
+            <!--内容列表-->
+            <div class="m-con-list f-fl">
+            	<div class="m-con-hd f-cb">
+                	<span class="f-fl">新闻资讯</span>
+                    <span class="f-fr">当前位置：主页&gt; 新闻资讯&gt;</span>
+                </div>
+                <div class="m-con-box"  id="m_con_box">
+                	<ul id="m_con">
+                    	<li class="f-cb">
+                        	<span >猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span >猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                        <li class="f-cb">
+                        	<span>猪圆环病毒的诊断与防治</span>
+                            <i>09-26</i>
+                        </li>
+                    </ul>
+                </div>
+                <!--页数page-->
+                <div class="m-page f-cb">
+                	<a href="#" class="m-sy">首页</a>
+                    <a href="#" class="m-pg1">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">7</a>
+              	    <a href="#">下一页</a>
+                    <a href="#">末页</a>
+                    <a href="#" class="m-num">
+                    	<span>1</span>
+                    </a>
+                    <a href="#">共7页80条</a>
+                </div>
+                <!--/页数page-->
+            </div>
+            <!--/内容列表-->
+        </div>
+        
+     </div>
+    <!-- /主体 -->
+    <!-- 尾部 -->
+    <div class="g-ft">
+    	<div class="m-ft">
+        	<div class="f-w">
+            	<div>
+                	<a href="#">关于我们</a>
+                    <b>|</b>
+                    <a href="#">产品展示</a>
+                    <b>|</b>
+                    <a href="#">新闻资讯</a>
+                    <b>|</b>
+                    <a href="#">技术专栏</a>
+                    <b>|</b>
+                    <a href="#">营销网络</a>
+                    <b>|</b>
+                    <a href="#">联系 我们</a>
+                    <b>|</b>
+                    <a href="#">关于我们</a>
+                </div>
+                <p>地址：天津市静海县G205(山深线)电话：400-168-8602手机：18697301223</p>
+                <p>邮箱：2822948387@qq.com</p>
+                <p>版权所有：陕西中牧生物科技有限公司&nbsp;&nbsp;(www.sxzmsw.com)&nbsp;备案号豫ICP备11029608号-1</p>
+            </div>
+        </div>
+    </div>
+ 	<!-- /尾部 -->
+</body>
+</html>
