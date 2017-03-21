@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="static/css/common/function.css"/>
 <link rel="stylesheet" href="static/css/common/reset.css"/>
 <script src="static/js/jquery/jquery.min.js"></script>
+<script src="static/js/index.js"></script>
 <style>
 	/*头部*/
 	body{ font-family:"Hiragino Sans GB";}
@@ -75,166 +76,9 @@
    .m-ft a{ font-size:12px; color:#666; padding:0 6px 0 10px;}
    .m-ft b{color:#fff;}	
 </style>
-<script>
-	$(document).ready(function() {
-		//轮播图
-		var count = 0;// 自动播放时的图片
-		var timer=null;
-		$("#m_btn li").click(function(){
-			
-			var _this=this;
-			$(this).addClass('m-on').siblings('li').removeClass('m-on');
-			$('#m_bn_img li ').eq($(this).index()).show().siblings('li').hide();
-			count=$(this).index()
-		});
-	
-			clearInterval(timer);
-			timer=setInterval(function(){
-				count++;
-				if(count==$("#m_btn li").length){
-					count=0;	
-				}	
-				$('#m_btn li:eq('+count+')').addClass('m-on').siblings('li').removeClass('m-on');
-				$('#m_bn_img li ').eq(count).show().siblings('li').hide();
-			},1000);	
-	
-		$('#m_bn_img li ').mouseover(function(){
-			clearInterval(timer);
-		});
-		$('#m_bn_img li ').mouseout(function(){
-				clearInterval(timer);
-			timer=setInterval(function(){
-				count++;
-				if(count==$("#m_btn li").length){
-					count=0;	
-				}	
-				$('#m_btn li:eq('+count+')').addClass('m-on').siblings('li').removeClass('m-on');
-				$('#m_bn_img li ').eq(count).show().siblings('li').hide();
-			},1000);
-		});	
-		;(function(){
-			var oAd_list=$('#m_ad_list');
-			
-			var oAd_img=$('#m_ad_img');
-			var aLi=oAd_img.find('li');
-			var timer;
-			oAd_img.HTML+=oAd_img.HTML;
-			var a=oAd_img.css({'width':aLi.eq(0).outerWidth(true)*aLi.length+'px'});
-			var W = a.width()/2;
-			var l = 0;
-			timer=setInterval(function(){
-				l +=1;
-				if(l>0){
-					l = -W;
-				}
-			
-				oAd_img.css({left:l+'px'});
-				alert(oAd_img.css(left()))
-			},30);
-			oAd_img.mouseover(function(){
-				clearInterval(timer);	
-			});	
-				
-			
-			oAd_img.mouseout(function(){
-				clearInterval(timer);	
-				timer=setInterval(function(){
-					l +=1;
-					if(l>0){
-						l = -W;
-					}
-				oAd_img.css({'left':l+'px'});
-					
-				},30);	
-			});
-		})();	
-		
-        
-    });
 
-	/*window.onload=function(){
-		//轮播图
-		;(function(){
-			var oBannar=document.getElementById('m_bannar');
-			var oBan_img=document.getElementById('m_bn_img');	
-			var aLi=oBan_img.children;
-			var oBtn=document.getElementById('m_btn');
-			var aSpan=oBtn.children;
-			var iNow=0;
-			var timer=null;				
-			for(var i=0;i<aSpan.length;i++){
-				aSpan[i].index=i;
-				aSpan[i].onclick=function(){
-						iNow= this.index;
-						tab();
-				};
-			}
-			function tab(){
-					for(var i=0;i<aSpan.length;i++){
-						aSpan[i].className='';
-						aLi[i].style.display='none';	
-					}
-					aSpan[iNow].className='m-on';
-					aLi[iNow].style.display='block';	
-			}
-			timer=setInterval(function(){
-					iNow++;
-					if(iNow==aSpan.length){
-						iNow=0;	
-					}
-					tab();		
-			},2000);
-			oBannar.onmouseover=function(){
-				clearInterval(timer);	
-			};
-			oBannar.onmouseout=function(){
-				clearInterval(timer);
-				timer=setInterval(function(){
-					iNow++;
-					if(iNow==aSpan.length){
-						iNow=0;	
-					}
-					tab();		
-				},2000);	
-			};
-					
-		})();*/
-		
-		//无缝滚动
-		/*;(function(){
-			var oAd_list=document.getElementById('m_ad_list');
-			var oAd_img=document.getElementById('m_ad_img');
-			var aLi=oAd_img.children;
-			var timer;
-			oAd_img.innerHTML += oAd_img.innerHTML;
-			oAd_img.style.width = aLi[0].offsetWidth *aLi.length+'px';
-			var W = oAd_img.offsetWidth/2;
-			var l = 0;
-			timer=setInterval(function(){
-				l +=1;
-				if(l>0){
-					l = -W;
-				}
-				oAd_img.style.left = l + 'px';
-				
-			},30);
-			oAd_img.onmouseover=function(){	
-				clearInterval(timer);	
-			}
-			oAd_img.onmouseout=function(){
-					
-				timer=setInterval(function(){
-					l +=1;
-					if(l>0){
-						l = -W;
-					}
-					oAd_img.style.left = l + 'px';
-					
-				},30);	
-			}
-		})();	
-	};*/
-</script>
+	
+
 </head>
 
 <body>
@@ -267,8 +111,8 @@
         <!--轮播图bannar-->
         <div class="m-bannar" id="m_bannar">
         	<ul class="m-bnimg" id="m_bn_img">
-            	<li ><img src="static/img/new-list.png"/></li>
-                <li><img src=""/></li>
+            	<li ><img src="static/img/bg1.png"/></li>
+                <li><img src="static/img/bg1.png"/></li>
                 <li><img src="static/img/bg1.png"/></li>
             </ul>
             <ol class="m-btn" id="m_btn">

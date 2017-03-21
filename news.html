@@ -61,24 +61,24 @@
    .m-ft b{color:#fff;}	
 </style>
 <script>
-	window.onload=function(){
+	window.onload=()=>{
 		//轮播图
-		;(function(){
-			var oBannar=document.getElementById('m_bannar');
-			var oBan_img=document.getElementById('m_bn_img');	
-			var aLi=oBan_img.children;
-			var oBtn=document.getElementById('m_btn');
-			var aSpan=oBtn.children;
-			var iNow=0;
-			var timer=null;				
+		;(()=>{
+			let oBannar=document.getElementById('m_bannar');
+			let oBan_img=document.getElementById('m_bn_img');	
+			let aLi=oBan_img.children;
+			let oBtn=document.getElementById('m_btn');
+			let aSpan=oBtn.children;
+			let iNow=0;
+			let timer=null;				
 			for(var i=0;i<aSpan.length;i++){
 				aSpan[i].index=i;
-				aSpan[i].onclick=function(){
+				aSpan[i].onclick=()=>{
 						iNow= this.index;
 						tab();
 				};
 			}
-			function tab(){
+			 (tab)=>{
 					for(var i=0;i<aSpan.length;i++){
 						aSpan[i].className='';
 						aLi[i].style.display='none';	
@@ -86,19 +86,19 @@
 					aSpan[iNow].className='m-on';
 					aLi[iNow].style.display='block';	
 			}
-			timer=setInterval(function(){
+			timer=setInterval(()=>{
 					iNow++;
 					if(iNow==aSpan.length){
 						iNow=0;	
 					}
 					tab();		
 			},2000);
-			oBannar.onmouseover=function(){
+			oBannar.onmouseover=()=>{
 				clearInterval(timer);	
 			};
-			oBannar.onmouseout=function(){
+			oBannar.onmouseout=()=>{
 				clearInterval(timer);
-				timer=setInterval(function(){
+				timer=setInterval(()=>{
 					iNow++;
 					if(iNow==aSpan.length){
 						iNow=0;	
