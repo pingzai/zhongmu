@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="static/css/common/function.css"/>
 <link rel="stylesheet" href="static/css/common/reset.css"/>
 <script src="static/js/jquery/jquery.min.js"></script>
+<script src="static/js/news.js"></script>
 <style>
 	/*头部*/
 	body{ font-family:"Hiragino Sans GB"; background:#fff;}
@@ -60,57 +61,9 @@
    .m-ft a{ font-size:12px; color:#666; padding:0 6px 0 10px;}
    .m-ft b{color:#fff;}	
 </style>
-<script>
-	window.onload=()=>{
-		//轮播图
-		;(()=>{
-			let oBannar=document.getElementById('m_bannar');
-			let oBan_img=document.getElementById('m_bn_img');	
-			let aLi=oBan_img.children;
-			let oBtn=document.getElementById('m_btn');
-			let aSpan=oBtn.children;
-			let iNow=0;
-			let timer=null;				
-			for(var i=0;i<aSpan.length;i++){
-				aSpan[i].index=i;
-				aSpan[i].onclick=()=>{
-						iNow= this.index;
-						tab();
-				};
-			}
-			 (tab)=>{
-					for(var i=0;i<aSpan.length;i++){
-						aSpan[i].className='';
-						aLi[i].style.display='none';	
-					}
-					aSpan[iNow].className='m-on';
-					aLi[iNow].style.display='block';	
-			}
-			timer=setInterval(()=>{
-					iNow++;
-					if(iNow==aSpan.length){
-						iNow=0;	
-					}
-					tab();		
-			},2000);
-			oBannar.onmouseover=()=>{
-				clearInterval(timer);	
-			};
-			oBannar.onmouseout=()=>{
-				clearInterval(timer);
-				timer=setInterval(()=>{
-					iNow++;
-					if(iNow==aSpan.length){
-						iNow=0;	
-					}
-					tab();		
-				},2000);	
-			};
-					
-		})();
-		
-	};
-</script>
+
+	
+
 </head>
 <body>
     <!-- 头部 -->
